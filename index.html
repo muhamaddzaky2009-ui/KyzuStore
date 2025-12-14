@@ -3,98 +3,114 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KyzuStore</title>
+<title>KyzuStore - Top Up Game</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!-- FONT -->
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
+:root{
+  --bg:#0b1020;
+  --card:#111936;
+  --primary:#4f8cff;
+  --accent:#22d3ee;
+}
+
+*{box-sizing:border-box}
+
 body{
   margin:0;
-  font-family:Poppins,sans-serif;
-  background:#050816;
-  color:white;
+  font-family:'Plus Jakarta Sans',sans-serif;
+  background:linear-gradient(180deg,#0b1020,#050814);
+  color:#fff;
 }
+
 header{
-  background:#0f172a;
+  background:rgba(17,25,54,.85);
+  backdrop-filter: blur(10px);
   padding:18px;
   text-align:center;
 }
-header h1{margin:0;color:#22d3ee}
-.container{max-width:900px;margin:auto;padding:15px}
-.step{
-  background:#0f172a;
-  padding:16px;
-  border-radius:14px;
-  margin-bottom:15px;
+
+header h1{
+  margin:0;
+  color:var(--accent);
 }
+
+.container{
+  max-width:1000px;
+  margin:auto;
+  padding:16px;
+}
+
+.card{
+  background:var(--card);
+  border-radius:18px;
+  padding:16px;
+  margin-bottom:18px;
+  box-shadow:0 10px 30px rgba(0,0,0,.4);
+}
+
+h3{margin-top:0}
+
+/* GAME */
 .games{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(110px,1fr));
-  gap:12px;
+  grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+  gap:14px;
 }
-.game-card{
-  background:#020617;
+
+.game{
+  background:#0f1733;
+  border-radius:16px;
   padding:14px;
-  border-radius:14px;
   text-align:center;
   cursor:pointer;
   transition:.3s;
 }
-.game-card.active{
-  outline:2px solid #22d3ee;
-  box-shadow:0 0 15px #22d3ee;
+
+.game img{
+  width:60px;
+  margin-bottom:8px;
 }
-.game-card img{width:70px;height:70px;object-fit:contain}
-input,select,button{
-  width:100%;
-  padding:12px;
-  margin-top:8px;
-  border-radius:10px;
-  border:none;
+
+.game:hover{
+  transform:translateY(-6px) scale(1.05);
+  box-shadow:0 0 25px var(--primary);
 }
-button{
-  background:#22d3ee;
-  font-weight:bold;
+
+/* PAYMENT */
+.payment label{
+  display:block;
+  margin-bottom:8px;
   cursor:pointer;
 }
+
+/* BUTTON */
+button{
+  background:linear-gradient(135deg,var(--primary),var(--accent));
+  border:none;
+  padding:12px 18px;
+  border-radius:14px;
+  color:#fff;
+  font-weight:600;
+  cursor:pointer;
+  margin-top:10px;
+}
+
 button:hover{opacity:.9}
 
-/* INVOICE + ANIMASI */
+/* INVOICE */
 #invoice{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.8);
-}
-.invoice-box{
-  background:#020617;
-  max-width:360px;
-  margin:80px auto;
-  padding:20px;
-  border-radius:16px;
-  animation:slideUp .4s ease;
-}
-@keyframes slideUp{
-  from{transform:translateY(50px);opacity:0}
-  to{transform:translateY(0);opacity:1}
+  background:#0f1733;
+  padding:12px;
+  border-radius:12px;
+  margin-top:10px;
 }
 
-/* RIWAYAT */
-#riwayat{
-  background:#0f172a;
-  padding:15px;
-  border-radius:14px;
-  margin-top:20px;
-}
-.riwayat-item{
-  font-size:13px;
-  border-bottom:1px solid #1e293b;
-  padding:6px 0;
-}
-
-/* ADMIN */
-#admin{
-  display:none;
+/* RESPONSIVE */
+@media(max-width:600px){
+  header h1{font-size:20px}
 }
 </style>
 </head>
@@ -102,125 +118,96 @@ button:hover{opacity:.9}
 <body>
 
 <header>
-<h1>KyzuStore</h1>
-<p>Store Top Up Game Murah Aman & Terpecaya</p>
+  <h1>KyzuStore</h1>
+  <p>Top Up Game • Simulasi Profesional</p>
 </header>
 
 <div class="container">
 
-<!-- USER -->
-<div id="user">
+  <!-- PILIH GAME -->
+  <div class="card">
+    <h3>🎮 Pilih Game</h3>
+    <div class="games">
+      <div class="game" onclick="selectGame('Mobile Legends')">
+        <img src="https://i.imgur.com/0y0y0y0.png">
+        <div>Mobile Legends</div>
+      </div>
+      <div class="game" onclick="selectGame('Free Fire')">
+        <img src="https://i.imgur.com/8Qf8Qf8.png">
+        <div>Free Fire</div>
+      </div>
+      <div class="game" onclick="selectGame('PUBG Mobile')">
+        <img src="https://i.imgur.com/1Q1Q1Q1.png">
+        <div>PUBG Mobile</div>
+      </div>
+    </div>
+  </div>
 
-<div class="step">
-<h3>Pilih Game</h3>
-<div class="games">
-<div class="game-card active" onclick="pilihGame('Mobile Legends',this)">
-<img src="img/ml.png"><p>MOBILE LEGENDS</p>
-</div>
-<div class="game-card" onclick="pilihGame('Free Fire',this)">
-<img src="img/ff.png"><p>FREE FIRE</p>
-</div>
-<div class="game-card" onclick="pilihGame('Genshin Impact',this)">
-<img src="img/genshin.png"><p>GENSHIN IMPACT</p>
-</div>
-</div>
-<input type="hidden" id="game" value="Mobile Legends">
-</div>
+  <!-- ID PLAYER -->
+  <div class="card">
+    <h3>🆔 ID Player</h3>
+    <input id="playerId" placeholder="Masukkan ID Player" style="width:100%;padding:12px;border-radius:12px;border:none">
+  </div>
 
-<div class="step">
-<input id="playerId" placeholder="ID Player">
-<select id="paket">
-<option>86 Diamond</option>
-<option>172 Diamond</option>
-<option>257 Diamond</option>
-</select>
-<select id="payment">
-<option>DANA</option>
-<option>OVO</option>
-<option>GoPay</option>
-</select>
-<button onclick="bayar()">BAYAR</button>
-</div>
+  <!-- PEMBAYARAN -->
+  <div class="card payment">
+    <h3>💳 Metode Pembayaran</h3>
+    <label><input type="radio" name="pay" value="Dana"> Dana</label>
+    <label><input type="radio" name="pay" value="OVO"> OVO</label>
+    <label><input type="radio" name="pay" value="GoPay"> GoPay</label>
+  </div>
 
-<div id="riwayat">
-<h3>Riwayat Transaksi</h3>
-<div id="listRiwayat"></div>
-</div>
+  <!-- INVOICE -->
+  <div class="card">
+    <h3>🧾 Invoice</h3>
+    <div id="invoice">Belum ada transaksi</div>
+    <button onclick="checkout()">Bayar (Simulasi)</button>
+  </div>
 
-<button onclick="masukAdmin()">Masuk Admin</button>
+  <!-- RIWAYAT -->
+  <div class="card">
+    <h3>📜 Riwayat Transaksi</h3>
+    <button onclick="lihatRiwayat()">Lihat Riwayat</button>
+    <div id="riwayat"></div>
+  </div>
 
-</div>
-
-<!-- ADMIN -->
-<div id="admin" class="step">
-<h3>ADMIN DASHBOARD</h3>
-<div id="adminData"></div>
-<button onclick="keluarAdmin()">Keluar</button>
-</div>
-
-</div>
-
-<!-- INVOICE -->
-<div id="invoice">
-<div class="invoice-box">
-<h3>INVOICE</h3>
-<p id="invData"></p>
-<button onclick="tutup()">Tutup</button>
-</div>
 </div>
 
 <script>
-let riwayat = JSON.parse(localStorage.getItem("kyzuData")) || [];
+let gameDipilih = "-";
 
-function pilihGame(nama,el){
- document.getElementById("game").value=nama;
- document.querySelectorAll(".game-card").forEach(c=>c.classList.remove("active"));
- el.classList.add("active");
+function selectGame(game){
+  gameDipilih = game;
+  alert("Game dipilih: " + game);
 }
 
-function bayar(){
- let id=document.getElementById("playerId").value;
- if(id===""){alert("ID wajib");return;}
- let data={
-  order:"KYZU-"+Date.now(),
-  game:game.value,
-  id:id,
-  paket:paket.value,
-  pay:payment.value,
-  status:"SUCCESS"
- };
- riwayat.push(data);
- localStorage.setItem("kyzuData",JSON.stringify(riwayat));
- tampilInvoice(data);
- tampilRiwayat();
+function checkout(){
+  const id = document.getElementById("playerId").value;
+  const pay = document.querySelector('input[name="pay"]:checked');
+
+  if(gameDipilih==="-" || !id || !pay){
+    alert("Lengkapi data dulu!");
+    return;
+  }
+
+  const inv = `
+  <b>Game:</b> ${gameDipilih}<br>
+  <b>ID:</b> ${id}<br>
+  <b>Pembayaran:</b> ${pay.value}<br>
+  <b>Status:</b> BERHASIL (SIMULASI)<br>
+  <b>Waktu:</b> ${new Date().toLocaleString()}
+  `;
+
+  document.getElementById("invoice").innerHTML = inv;
+
+  let history = JSON.parse(localStorage.getItem("riwayat")||"[]");
+  history.push(inv);
+  localStorage.setItem("riwayat",JSON.stringify(history));
 }
 
-function tampilInvoice(d){
- invData.innerHTML=
- `Order: ${d.order}<br>Game: ${d.game}<br>ID: ${d.id}<br>Paket: ${d.paket}<br>Status: <b>${d.status}</b>`;
- invoice.style.display="block";
-}
-
-function tutup(){invoice.style.display="none"}
-
-function tampilRiwayat(){
- listRiwayat.innerHTML="";
- riwayat.forEach(r=>{
-  listRiwayat.innerHTML+=
-  `<div class="riwayat-item">${r.order} - ${r.game} - ${r.status}</div>`;
- });
-}
-tampilRiwayat();
-
-/* ADMIN */
-function masukAdmin(){
- user.style.display="none";
- admin.style.display="block";
- adminData.innerHTML=JSON.stringify(riwayat,null,2);
-}
-function keluarAdmin(){
- admin.style.display="none";
- user.style.display="block";
+function lihatRiwayat(){
+  let data = JSON.parse(localStorage.getItem("riwayat")||"[]");
+  document.getElementById("riwayat").innerHTML = data.join("<hr>");
 }
 </script>
 
